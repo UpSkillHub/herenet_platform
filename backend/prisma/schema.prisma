@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  phone     String?
+  isAdmin   Boolean  @default(false)
+  status    String   @default("approved")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ads      Ad[]
+  payments Payment[]
+}
+
+model Category {
+  id   String @id @default(cuid())
+  name String @unique
+
+  ads Ad[]
+}
+
+model Ad {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  location    String
+  images      String   @default("[]")   // SQLite compatible
+  status      String   @default("pending")
+  expiryDate  DateTime?
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId     String
+  categoryId String
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id])
+
+  payments Payment[]
+}
+
+model Payment {
+  id            String   @id @default(cuid())
+  amount        Float
+  days          Int
+  isFeatured    Boolean  @default(false)
+  paymentStatus String   @default("pending")
+  createdAt     DateTime @default(now())
+
+  userId String
+  adId   String
+
+  user User @relation(fields: [userId], references: [id])
+  ad   Ad   @relation(fields: [adId], references: [id])
+}
