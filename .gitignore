@@ -1,45 +1,37 @@
 # =======================
-# Root Level
+# Environment & Secrets
 # =======================
 .env
 .env.local
 .env.*.local
-.DS_Store
+*.env
+
+# =======================
+# Dependencies
+# =======================
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# =======================
+# Build Outputs
+# =======================
+.next/
+out/
+build/
+dist/
+
+# =======================
+# Logs & Temporary Files
+# =======================
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
-.pnpm-debug.log*
-
-# =======================
-# Frontend (Next.js)
-# =======================
-frontend/.env
-frontend/.env.local
-frontend/.env.*.local
-frontend/.next/
-frontend/out/
-frontend/build/
-**/node_modules/
-frontend/.vercel
-frontend/.turbo
-frontend/next-env.d.ts
-frontend/.eslintcache
-
-# =======================
-# Backend (Node.js)
-# =======================
-backend/.env
-backend/node_modules/
-backend/dist/
-backend/build/
-backend/logs/
-backend/*.log
-backend/coverage/
-backend/.nyc_output/
-backend/.prisma/
-backend/generated/
+*.tmp
+*.temp
+.cache
+.tmp/
 
 # =======================
 # Database & ORM
@@ -59,7 +51,15 @@ prisma/migrations/*/
 **/tmp/
 
 # =======================
-# IDE & Editors
+# Large Binaries & Next.js SWC
+# =======================
+**/*.node
+**/*.exe
+**/*.dll
+frontend/node_modules/@next/swc-*
+
+# =======================
+# IDE & Editor Files
 # =======================
 .vscode/
 .idea/
@@ -69,13 +69,17 @@ prisma/migrations/*/
 .project
 .classpath
 .settings/
-
-# =======================
-# OS
-# =======================
+.DS_Store
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# =======================
+# Package Lock Files (optional - choose one)
+# =======================
+# yarn.lock
+# pnpm-lock.yaml
+# package-lock.json
 
 # =======================
 # Misc
@@ -87,15 +91,7 @@ Desktop.ini
 *.csr
 
 # =======================
-# Package Managers
+# Coverage & Testing
 # =======================
-yarn.lock
-pnpm-lock.yaml
-package-lock.json
-
-# =======================
-# Temporary
-# =======================
-*.tmp
-*.temp
-.cache
+coverage/
+.nyc_output/
