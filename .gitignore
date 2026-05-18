@@ -1,5 +1,5 @@
 # =======================
-# Environment & Secrets
+# Environment Variables
 # =======================
 .env
 .env.local
@@ -7,14 +7,14 @@
 *.env
 
 # =======================
-# Dependencies
+# Node.js Dependencies
 # =======================
 node_modules/
 frontend/node_modules/
 backend/node_modules/
 
 # =======================
-# Build Outputs
+# Build & Output Directories
 # =======================
 .next/
 out/
@@ -30,11 +30,11 @@ yarn-debug.log*
 yarn-error.log*
 *.tmp
 *.temp
-.cache
+.cache/
 .tmp/
 
 # =======================
-# Database & ORM
+# Database Files
 # =======================
 *.db
 *.sqlite
@@ -51,11 +51,10 @@ prisma/migrations/*/
 **/tmp/
 
 # =======================
-# Large Binaries & Next.js SWC
+# Large Binaries (Critical - prevents the 176MB error)
 # =======================
 **/*.node
-**/*.exe
-**/*.dll
+**/@next/swc-*
 frontend/node_modules/@next/swc-*
 
 # =======================
@@ -75,11 +74,17 @@ ehthumbs.db
 Desktop.ini
 
 # =======================
-# Package Lock Files (optional - choose one)
+# Package Manager Locks (uncomment if you prefer one)
 # =======================
+# package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
-# package-lock.json
+
+# =======================
+# Testing & Coverage
+# =======================
+coverage/
+.nyc_output/
 
 # =======================
 # Misc
@@ -89,9 +94,3 @@ Desktop.ini
 *.cert
 *.crt
 *.csr
-
-# =======================
-# Coverage & Testing
-# =======================
-coverage/
-.nyc_output/
