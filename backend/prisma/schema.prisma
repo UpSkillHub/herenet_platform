@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -39,6 +39,7 @@ model Ad {
   status      String   @default("pending")
   expiryDate  DateTime?
   isFeatured  Boolean  @default(false)
+  isPaid      Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -53,6 +54,11 @@ model Ad {
 
 model Payment {
   id            String   @id @default(cuid())
+  transactionId String?  @unique
+  transactionRef String? @unique
+  currency      String?
+  method        String?
+  flutterwaveReference String?
   amount        Float
   days          Int
   isFeatured    Boolean  @default(false)
@@ -60,8 +66,8 @@ model Payment {
   createdAt     DateTime @default(now())
 
   userId String
-  adId   String
+  adId   String?
 
   user User @relation(fields: [userId], references: [id])
-  ad   Ad   @relation(fields: [adId], references: [id])
+  ad   Ad?   @relation(fields: [adId], references: [id])
 }

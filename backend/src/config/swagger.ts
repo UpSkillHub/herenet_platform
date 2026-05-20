@@ -8,9 +8,18 @@ const swaggerOptions = {
       version: '1.0.0',
       description: 'Online Marketplace & Opportunity Platform API',
     },
-    servers: [{ url: 'http://localhost:5000' }],
+    servers: [{ url: 'http://localhost:5001' }],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
   },
-  apis: ['./src/routes/*.ts'],   // Make sure this path is correct
+  apis: ['./src/routes/*.{js,ts}'],   // Scan both TS and JS route files
 };
 
 export const swaggerSpecs = swaggerJsdoc(swaggerOptions);

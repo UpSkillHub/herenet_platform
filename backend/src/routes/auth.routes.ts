@@ -1,5 +1,5 @@
 import express from 'express';
-import { register, login, verifyOtp } from '../controllers/auth.controller';
+import { register, login, verifyOtp, resendOtp } from '../controllers/auth.controller';
 
 const router = express.Router();
 
@@ -67,5 +67,25 @@ router.post('/login', login);
  *         description: OTP verified successfully
  */
 router.post('/verify-otp', verifyOtp);
+
+/**
+ * @swagger
+ * /api/auth/resend-otp:
+ *   post:
+ *     summary: Resend OTP
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email: { type: string }
+ *     responses:
+ *       200:
+ *         description: OTP resent successfully
+ */
+router.post('/resend-otp', resendOtp);
 
 export default router;

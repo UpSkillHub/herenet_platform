@@ -76,6 +76,14 @@ export default function AdDetail() {
     alert('Link copied to clipboard!');
   };
 
+  const formatDate = (dateString: string) => {
+    return new Intl.DateTimeFormat('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    }).format(new Date(dateString));
+  };
+
   const shareOnWhatsApp = () => {
     window.open(`https://wa.me/?text=${encodeURIComponent(window.location.href)}`, '_blank');
   };
@@ -633,7 +641,7 @@ export default function AdDetail() {
                   <div className="ad-meta">
                     <span className="ad-meta-item">📍 {ad.location || 'Rwanda'}</span>
                     <span className="ad-meta-item">
-                      🕐 {ad.expiryDate ? `Expires ${new Date(ad.expiryDate).toLocaleDateString()}` : 'Active'}
+                      🕐 {ad.expiryDate ? `Expires ${formatDate(ad.expiryDate)}` : 'Active'}
                     </span>
                     <span className="ad-meta-item">🏷️ {ad.status}</span>
                   </div>

@@ -24,6 +24,7 @@ export default function MyAds() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   // ── Auth guard ──
   useEffect(() => {
@@ -37,6 +38,10 @@ export default function MyAds() {
       String(parsed?.isAdmin).toLowerCase() === 'true';
     if (isAdmin) { router.replace('/admin/dashboard'); return; }
   }, [router]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // ── Fetch user's own ads ──
   useEffect(() => {
@@ -293,7 +298,7 @@ export default function MyAds() {
               {filtered.map((ad, index) => {
                 const firstImage = ad.images?.[0];
                 const expDate = ad.expiryDate ? new Date(ad.expiryDate) : null;
-                const daysLeft = expDate
+                const daysLeft = mounted && expDate
                   ? Math.ceil((expDate.getTime() - Date.now()) / 86400000)
                   : null;
                 const expiringSoon = daysLeft !== null && daysLeft <= 3 && daysLeft > 0;

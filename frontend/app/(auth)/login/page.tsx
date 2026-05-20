@@ -44,9 +44,16 @@ const handleLogin = async (e: React.FormEvent) => {
     }
 
   } catch (err: any) {
-    setError(
-      err?.response?.data?.message || 'Invalid email or password. Please try again.'
-    );
+    const message = err?.response?.data?.message || 'Invalid email or password. Please try again.';
+    
+    // Check if account is pending approval and OTP was sent
+    if (message.includes('pending approval') && message.includes('OTP has been sent')) {
+      // Store email for verify-otp page and redirect
+      router.replace(`/verify-otp?email=${encodeURIComponent(email)}`);
+      return;
+    }
+
+    setError(message);
   } finally {
     setLoading(false);
   }

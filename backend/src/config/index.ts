@@ -3,7 +3,7 @@ dotenv.config();
 
 export const config = {
   jwtSecret: process.env.JWT_SECRET!,
-  port: process.env.PORT || 5000,
+  port: process.env.PORT || 5001,
   emailUser: process.env.EMAIL_USER,
   emailPass: process.env.EMAIL_PASS,
 };

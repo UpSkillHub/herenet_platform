@@ -8,7 +8,8 @@ const FLW_PUBLIC_KEY = process.env.FLUTTERWAVE_PUBLIC_KEY;
 
 export const initializePayment = async (req: Request, res: Response) => {
   try {
-    const userId = (req as any).user?.userId;
+    const userId = String((req as any).user?.userId || (req as any).user?.id);
+    const { days = 1 } = req.body;
     const { amount, email, name, adId } = req.body;
 
     if (!amount || !email) {
@@ -47,9 +48,12 @@ export const initializePayment = async (req: Request, res: Response) => {
       data: {
         transactionRef,
         amount: Number(amount),
-        status: 'pending',
-        userId,
-        adId: adId || null,
+        days: Number(days),
+        paymentStatus: 'pending',
+        user: {
+          connect: { id: userId },
+        },
+        ad: adId ? { connect: { id: String(adId) } } : undefined,
       },
     });
 
@@ -85,8 +89,8 @@ export const verifyPayment = async (req: Request, res: Response) => {
       // Update payment status
       await prisma.payment.update({
         where: { transactionRef: response.data.data.tx_ref },
-        data: { 
-          status: 'completed',
+        data: {
+          paymentStatus: 'completed',
           flutterwaveReference: response.data.data.id,
         },
       });
@@ -117,7 +121,9 @@ export const verifyPayment = async (req: Request, res: Response) => {
 
 export const getPaymentStatus = async (req: Request, res: Response) => {
   try {
-    const { transactionRef } = req.params;
+    const transactionRef = Array.isArray(req.params.transactionRef)
+      ? req.params.transactionRef[0]
+      : req.params.transactionRef;
     
     const payment = await prisma.payment.findUnique({
       where: { transactionRef },

@@ -274,7 +274,7 @@ export default function AdminDashboard() {
                   [...Array(4)].map((_, i) => (
                     <tr key={i}>
                       {[...Array(6)].map((_, j) => (
-                        <td key={j}><div className="skel-line" style={{ width: `${60 + Math.random() * 30}%` }} /></td>
+                        <td key={j}><div className="skel-line" style={{ width: `${65 + (j * 5)}%` }} /></td>
                       ))}
                     </tr>
                   ))

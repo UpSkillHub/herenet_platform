@@ -7,7 +7,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/ads')
+    fetch('http://localhost:5001/api/ads')
       .then(res => res.json())
       .then(data => {
         setAds(data.slice(0, 8));

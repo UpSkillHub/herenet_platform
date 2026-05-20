@@ -97,11 +97,13 @@ export const approveAd = async (req: AuthRequest, res: Response) => {
       return res.status(403).json({ message: 'Admin access required' });
     }
 
-    const { id } = req.params;
+    const id = Array.isArray(req.params.id)
+      ? req.params.id[0]
+      : req.params.id;
 
     const ad = await prisma.ad.update({
       where: { id },
-      data: { 
+      data: {
         status: 'approved',
         updatedAt: new Date()
       },
@@ -129,12 +131,15 @@ export const rejectAd = async (req: AuthRequest, res: Response) => {
       return res.status(403).json({ message: 'Admin access required' });
     }
 
-    const { id } = req.params;
+    const id = Array.isArray(req.params.id)
+      ? req.params.id[0]
+      : req.params.id;
+
     const { reason } = req.body;
 
     const ad = await prisma.ad.update({
       where: { id },
-      data: { 
+      data: {
         status: 'rejected',
         updatedAt: new Date()
       }
@@ -184,7 +189,10 @@ export const updateUserStatus = async (req: AuthRequest, res: Response) => {
       return res.status(403).json({ message: 'Admin access required' });
     }
 
-    const { id } = req.params;
+    const id = Array.isArray(req.params.id)
+      ? req.params.id[0]
+      : req.params.id;
+
     const { status } = req.body;
 
     const user = await prisma.user.update({
@@ -212,13 +220,19 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
       return res.status(403).json({ message: 'Admin access required' });
     }
 
-    const { id } = req.params;
+    const id = Array.isArray(req.params.id)
+      ? req.params.id[0]
+      : req.params.id;
 
     // First delete all user's ads
-    await prisma.ad.deleteMany({ where: { userId: id } });
-    
+    await prisma.ad.deleteMany({
+      where: { userId: id }
+    });
+
     // Then delete the user
-    await prisma.user.delete({ where: { id } });
+    await prisma.user.delete({
+      where: { id }
+    });
 
     res.json({ message: 'User deleted successfully' });
   } catch (error) {
@@ -254,7 +268,7 @@ export const getAdminStats = async (req: AuthRequest, res: Response) => {
       pendingAds,
       approvedAds,
       rejectedAds,
-      totalRevenue: 0 // Placeholder until payments table is added
+      totalRevenue: 0
     });
   } catch (error) {
     console.error('Error fetching admin stats:', error);
@@ -265,8 +279,10 @@ export const getAdminStats = async (req: AuthRequest, res: Response) => {
 // Get a single ad details
 export const getAdDetails = async (req: AuthRequest, res: Response) => {
   try {
-    const { id } = req.params;
-    
+    const id = Array.isArray(req.params.id)
+      ? req.params.id[0]
+      : req.params.id;
+
     const ad = await prisma.ad.findUnique({
       where: { id },
       include: {
@@ -293,7 +309,7 @@ export const getAdDetails = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// Get all ads for admin dashboard (main endpoint)
+// Get all ads for admin dashboard
 export const getAllAdminAds = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user?.isAdmin) {
@@ -328,11 +344,28 @@ export const getAllAdminPayments = async (req: AuthRequest, res: Response) => {
     if (!req.user?.isAdmin) {
       return res.status(403).json({ message: 'Admin access required' });
     }
+    const payments = await prisma.payment.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        ad: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+    });
 
-    // Return empty array for now (payments table not implemented yet)
-    res.json([]);
+    res.json(payments);
   } catch (error) {
     console.error('Error fetching payments:', error);
-    res.json([]);
+    res.status(500).json({ message: 'Failed to fetch payments' });
   }
 };

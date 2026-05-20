@@ -1,5 +1,14 @@
 // backend/src/controllers/upload.controller.ts
 import { Request, Response } from 'express';
+
+type UploadedFile = {
+  originalname: string;
+  buffer: Buffer;
+};
+
+type UploadRequest = Request & {
+  files?: UploadedFile[];
+};
 import path from 'path';
 import fs from 'fs';
 
@@ -13,7 +22,7 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 const uploadController = {
   async uploadImages(req: Request, res: Response) {
     try {
-      const files = req.files as Express.Multer.File[];
+      const files = ((req as UploadRequest).files || []) as UploadedFile[];
 
       if (!files || files.length === 0) {
         return res.status(400).json({ message: 'No files uploaded' });
