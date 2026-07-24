@@ -64,7 +64,12 @@ export const initializePayment = async (req: Request, res: Response) => {
     });
     
   } catch (error: any) {
-    console.error('Payment initialization error:', error.response?.data || error.message);
+    console.error('💥 Payment initialization error:');
+    console.error('Message:', error.message);
+    console.error('Stack:', error.stack);
+    console.error('Response data:', error.response?.data);
+    console.error('Full error:', JSON.stringify(error, null, 2));
+    
     return res.status(500).json({ 
       message: 'Payment initialization failed', 
       error: error.response?.data?.message || error.message 
@@ -114,7 +119,12 @@ export const verifyPayment = async (req: Request, res: Response) => {
     });
     
   } catch (error: any) {
-    console.error('Payment verification error:', error);
+    console.error('💥 Payment verification error:');
+    console.error('Message:', error.message);
+    console.error('Stack:', error.stack);
+    console.error('Response data:', error.response?.data);
+    console.error('Full error:', JSON.stringify(error, null, 2));
+    
     return res.status(500).json({ message: 'Verification failed' });
   }
 };
@@ -136,6 +146,9 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
     
     res.json(payment);
   } catch (error: any) {
+    console.error('💥 Get payment status error:');
+    console.error('Message:', error.message);
+    console.error('Stack:', error.stack);
     res.status(500).json({ message: 'Failed to fetch payment status' });
   }
 };

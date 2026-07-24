@@ -1,12 +1,3 @@
-// ============================================================
-//  backend/routes/payments.ts  — add this route
-//  backend/controllers/ad.controller.ts  — add createAd
-// ============================================================
-
-// ────────────────────────────────────────────────────────────
-//  1. PAYMENTS ROUTER  (backend/routes/payments.ts)
-//     Mount:  app.use('/api/payments', paymentsRouter);
-// ────────────────────────────────────────────────────────────
 import { Router } from 'express';
 import axios from 'axios';
 import { PrismaClient } from '@prisma/client';
@@ -15,10 +6,7 @@ import { authenticateToken } from '../middleware/auth.middleware';
 const paymentsRouter = Router();
 const prisma = new PrismaClient();
 
-const FLW_SECRET = process.env.FLW_SECRET_KEY!; // your Flutterwave secret key
-
-// POST /api/payments/verify
-// Called by frontend after Flutterwave modal succeeds
+const FLW_SECRET = process.env.FLW_SECRET_KEY!; 
 paymentsRouter.post('/verify', authenticateToken, async (req: any, res: any) => {
   const { transaction_id, tx_ref, amount } = req.body;
 
@@ -61,12 +49,13 @@ paymentsRouter.post('/verify', authenticateToken, async (req: any, res: any) => 
     const payment = await prisma.payment.create({
       data: {
         transactionId:  String(transaction_id),
-        txRef:          tx_ref,
+        transactionRef: tx_ref,
         amount:         data.amount,
         currency:       data.currency,
         paymentStatus:  'paid',
         method:         data.payment_type || 'flutterwave',
         userId:         req.user.id,
+        days:           7, // Default days
       },
     });
 
@@ -126,13 +115,12 @@ export const createAd = async (req: Request, res: Response) => {
         title:       String(title).trim(),
         description: String(description || '').trim(),
         price:       Number(price) || 0,
-        categoryId:  parseInt(String(categoryId), 10),
+        categoryId:  String(categoryId),
         location:    String(location).trim(),
         isFeatured:  Boolean(isFeatured),
         status:      'pending',
-        expiresAt,
+        expiryDate:  expiresAt,
         userId,
-        ...(paymentId ? { paymentId: String(paymentId) } : {}),
       },
       include: { category: true },
     });

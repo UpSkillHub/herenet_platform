@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import adController from '../controllers/ad.controller';
 import { authenticateToken } from '../middleware/auth.middleware';
+import { requireMember } from '../middleware/membership.middleware';
 
 const router = Router();
 
@@ -17,6 +18,22 @@ const router = Router();
  */
 // Public routes
 router.get('/', adController.getAllAds);
+
+// Protected routes - MUST come before /:id to avoid "my" being treated as an ID
+/**
+ * @swagger
+ * /api/ads/my:
+ *   get:
+ *     summary: Get ads for the current user
+ *     tags: [Ads]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User ads returned
+ */
+router.get('/my', authenticateToken, adController.getMyAds);
+
 /**
  * @swagger
  * /api/ads/{id}:
@@ -37,12 +54,11 @@ router.get('/', adController.getAllAds);
  */
 router.get('/:id', adController.getAdById);
 
-// Protected routes
 /**
  * @swagger
  * /api/ads:
  *   post:
- *     summary: Create a new ad
+ *     summary: Create a new ad (Members only)
  *     tags: [Ads]
  *     security:
  *       - bearerAuth: []
@@ -55,20 +71,53 @@ router.get('/:id', adController.getAdById);
  *     responses:
  *       201:
  *         description: Ad created successfully
+ *       403:
+ *         description: Member access required
  */
-router.post('/', authenticateToken, adController.createAd);
+router.post('/', authenticateToken, requireMember, adController.createAd);
+
 /**
  * @swagger
- * /api/ads/my:
- *   get:
- *     summary: Get ads for the current user
+ * /api/ads/{id}:
+ *   put:
+ *     summary: Update an ad (Members only)
  *     tags: [Ads]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
- *         description: User ads returned
+ *         description: Ad updated successfully
+ *       403:
+ *         description: Member access required
  */
-router.get('/my', authenticateToken, adController.getMyAds);
+router.put('/:id', authenticateToken, requireMember, adController.updateAd);
+
+/**
+ * @swagger
+ * /api/ads/{id}:
+ *   delete:
+ *     summary: Delete an ad (Members only)
+ *     tags: [Ads]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Ad deleted successfully
+ *       403:
+ *         description: Member access required
+ */
+router.delete('/:id', authenticateToken, requireMember, adController.deleteAd);
 
 export default router;

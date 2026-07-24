@@ -27,7 +27,10 @@ export const getPendingAds = async (req: AuthRequest, res: Response) => {
 
     res.json(pendingAds);
   } catch (error) {
-    console.error('Error fetching pending ads:', error);
+    console.error('💥 Error fetching pending ads:');
+    console.error('Message:', (error as Error).message);
+    console.error('Stack:', (error as Error).stack);
+    
     res.status(500).json({ message: 'Failed to fetch pending ads' });
   }
 };
@@ -56,7 +59,10 @@ export const getApprovedAds = async (req: AuthRequest, res: Response) => {
 
     res.json(approvedAds);
   } catch (error) {
-    console.error('Error fetching approved ads:', error);
+    console.error('💥 Error fetching approved ads:');
+    console.error('Message:', (error as Error).message);
+    console.error('Stack:', (error as Error).stack);
+    
     res.status(500).json({ message: 'Failed to fetch approved ads' });
   }
 };
@@ -119,7 +125,10 @@ export const approveAd = async (req: AuthRequest, res: Response) => {
 
     res.json({ message: 'Ad approved successfully', ad });
   } catch (error) {
-    console.error('Error approving ad:', error);
+    console.error('💥 Error approving ad:');
+    console.error('Message:', (error as Error).message);
+    console.error('Stack:', (error as Error).stack);
+    
     res.status(500).json({ message: 'Failed to approve ad' });
   }
 };
@@ -147,7 +156,10 @@ export const rejectAd = async (req: AuthRequest, res: Response) => {
 
     res.json({ message: 'Ad rejected successfully', ad });
   } catch (error) {
-    console.error('Error rejecting ad:', error);
+    console.error('💥 Error rejecting ad:');
+    console.error('Message:', (error as Error).message);
+    console.error('Stack:', (error as Error).stack);
+    
     res.status(500).json({ message: 'Failed to reject ad' });
   }
 };
@@ -177,7 +189,10 @@ export const getAllUsers = async (req: AuthRequest, res: Response) => {
 
     res.json(users);
   } catch (error) {
-    console.error('Error fetching users:', error);
+    console.error('💥 Error fetching users:');
+    console.error('Message:', (error as Error).message);
+    console.error('Stack:', (error as Error).stack);
+    
     res.status(500).json({ message: 'Failed to fetch users' });
   }
 };
@@ -236,7 +251,10 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
 
     res.json({ message: 'User deleted successfully' });
   } catch (error) {
-    console.error('Error deleting user:', error);
+    console.error('💥 Error deleting user:');
+    console.error('Message:', (error as Error).message);
+    console.error('Stack:', (error as Error).stack);
+    
     res.status(500).json({ message: 'Failed to delete user' });
   }
 };
@@ -271,7 +289,10 @@ export const getAdminStats = async (req: AuthRequest, res: Response) => {
       totalRevenue: 0
     });
   } catch (error) {
-    console.error('Error fetching admin stats:', error);
+    console.error('💥 Error fetching admin stats:');
+    console.error('Message:', (error as Error).message);
+    console.error('Stack:', (error as Error).stack);
+    
     res.status(500).json({ message: 'Failed to fetch admin stats' });
   }
 };
@@ -365,7 +386,10 @@ export const getAllAdminPayments = async (req: AuthRequest, res: Response) => {
 
     res.json(payments);
   } catch (error) {
-    console.error('Error fetching payments:', error);
+    console.error('💥 Error fetching payments:');
+    console.error('Message:', (error as Error).message);
+    console.error('Stack:', (error as Error).stack);
+    
     res.status(500).json({ message: 'Failed to fetch payments' });
   }
 };

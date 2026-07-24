@@ -44,6 +44,26 @@ export const emailService = {
       `,
     });
   },
+
+  async sendPasswordResetOtp(email: string, otp: string) {
+    const mailOptions = {
+      from: `"HereNet" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: 'Password Reset - HereNet',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2>Password Reset Request</h2>
+          <p>You requested to reset your password. Use the code below to proceed:</p>
+          <h1 style="color: #C9A84C; letter-spacing: 8px;">${otp}</h1>
+          <p>This code will expire in 10 minutes.</p>
+          <p style="color: #dc3545;">If you didn't request a password reset, please ignore this email and ensure your account is secure.</p>
+        </div>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log(`📧 Password reset OTP sent to ${email}`);
+  },
 };
 
 export default emailService;

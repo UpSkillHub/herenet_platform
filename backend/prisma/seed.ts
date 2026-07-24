@@ -7,24 +7,28 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Starting database seed...');
 
-  // 1. CREATE CATEGORIES (only id and name as per your schema)
+  // 1. CREATE CATEGORIES (E-commerce categories)
   console.log('📂 Creating categories...');
   
   const categories = [
-    { id: '1', name: 'Products' },
-    { id: '2', name: 'Services' },
-    { id: '3', name: 'Jobs' },
-    { id: '4', name: 'Real Estate' },
-    { id: '5', name: 'Vehicles' },
-    { id: '6', name: 'Electronics' },
-    { id: '7', name: 'Furniture' },
-    { id: '8', name: 'Clothing' },
+    { id: 'cat-electronics', name: 'Electronics' },
+    { id: 'cat-fashion', name: 'Fashion' },
+    { id: 'cat-home-living', name: 'Home & Living' },
+    { id: 'cat-beauty-health', name: 'Beauty & Health' },
+    { id: 'cat-sports-outdoors', name: 'Sports & Outdoors' },
+    { id: 'cat-books-media', name: 'Books & Media' },
+    { id: 'cat-toys-games', name: 'Toys & Games' },
+    { id: 'cat-automotive', name: 'Automotive' },
+    { id: 'cat-groceries', name: 'Groceries & Food' },
+    { id: 'cat-phones-tablets', name: 'Phones & Tablets' },
+    { id: 'cat-computers', name: 'Computers & Accessories' },
+    { id: 'cat-appliances', name: 'Home Appliances' },
   ];
 
   for (const category of categories) {
     await prisma.category.upsert({
       where: { id: category.id },
-      update: {},
+      update: { name: category.name },
       create: category,
     });
   }

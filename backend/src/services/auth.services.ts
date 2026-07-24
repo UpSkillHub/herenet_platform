@@ -14,25 +14,43 @@ async function generateAndSendOtp(email: string) {
 
 export const authService = {
   async register(data: RegisterInput) {
-    const { name, email, password, phone } = data;
+    const { name, email, password, phone, role } = data;
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
       throw new Error('User with this email already exists');
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
+    if (role && role === 'member') {
+      const existingMember = await prisma.user.findFirst({
+        where: { email, isMember: true },
+      });
+      if (existingMember) {
+        throw new Error('Member with this email already exists');
+      }
+    }
+    else if (role && role === 'admin') {
+      const existingAdmin = await prisma.user.findFirst({
+        where: { email, isAdmin: true },
+      });
+      if (existingAdmin) {
+        throw new Error('Admin with this email already exists');
+      }
+    }
+    
     const user = await prisma.user.create({
       data: {
         name,
         email,
-        password: hashedPassword,
-        phone: phone || null,
+        password: await bcrypt.hash(password, 10),
+        phone,
         status: 'pending',
-        isAdmin: false,
+        isMember: role === 'member',
+        isAdmin: role === 'admin',
       },
     });
+
+  
 
     // Generate & Store OTP
     const otp = otpUtils.generateOtp();
@@ -58,6 +76,7 @@ export const authService = {
         password: true,
         status: true,
         isAdmin: true,
+        isMember: true,
       },
     });
 
@@ -75,7 +94,7 @@ export const authService = {
     }
 
     const token = jwt.sign(
-      { userId: user.id, isAdmin: user.isAdmin },
+      { userId: user.id, isAdmin: user.isAdmin, isMember: user.isMember },
       process.env.JWT_SECRET!,
       { expiresIn: '7d' }
     );
@@ -87,6 +106,7 @@ export const authService = {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        isMember: user.isMember,
       },
     };
   },
@@ -105,12 +125,13 @@ export const authService = {
         name: true,
         email: true,
         isAdmin: true,
+        isMember: true,
         status: true,
       },
     });
 
     const token = jwt.sign(
-      { userId: user.id, isAdmin: user.isAdmin },
+      { userId: user.id, isAdmin: user.isAdmin, isMember: user.isMember },
       process.env.JWT_SECRET!,
       { expiresIn: '7d' }
     );
@@ -138,6 +159,50 @@ export const authService = {
 
     return {
       message: 'A new OTP has been sent to your email.',
+    };
+  },
+
+  async requestPasswordReset(email: string) {
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      throw new Error('No user found with this email');
+    }
+
+    // Generate and store OTP for password reset
+    const otp = otpUtils.generateOtp();
+    otpUtils.storeOtp(`reset_${email}`, otp);
+
+    await emailService.sendPasswordResetOtp(email, otp);
+
+    return {
+      message: 'Password reset OTP has been sent to your email.',
+    };
+  },
+
+  async resetPassword(email: string, otp: string, newPassword: string) {
+    // Verify OTP with 'reset_' prefix
+    const result = otpUtils.verifyOtp(`reset_${email}`, otp);
+    if (!result.success) {
+      throw new Error(result.message);
+    }
+
+    // Verify user exists
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      throw new Error('No user found with this email');
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update password
+    await prisma.user.update({
+      where: { email },
+      data: { password: hashedPassword },
+    });
+
+    return {
+      message: 'Password reset successfully. You can now login with your new password.',
     };
   },
 };
