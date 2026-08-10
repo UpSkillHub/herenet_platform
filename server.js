@@ -17,9 +17,10 @@ const openai = new OpenAI({
 // Company knowledge base
 const companyKnowledge = {
   about: {
-    name: "Ubaka",
-    founded: "2020",
-    description: "Ubaka is Rwanda's premier construction and hardware supply store, transforming how the world sources construction materials through technology and exceptional service.",
+    name: "Shopacla",
+    founded: "s026",
+    description:
+      "Shopacla , transforming how the world sources construction materials through technology and exceptional service.",
     mission: "Building excellence, one project at a time",
     values: [
       "Quality First - We never compromise on quality, sourcing only from trusted manufacturers",
@@ -27,40 +28,46 @@ const companyKnowledge = {
       "Integrity - We operate with transparency and honesty",
       "Innovation - We continually seek new ways to improve our services",
       "Reliability - Our customers can depend on us for consistent service quality",
-      "Sustainability - We are committed to environmentally responsible practices"
-    ]
+      "Sustainability - We are committed to environmentally responsible practices",
+    ],
   },
   services: [
     {
       name: "Fast Delivery",
-      description: "Same-day delivery within city limits, or 1-3 business days nationwide with real-time tracking"
+      description:
+        "Same-day delivery within city limits, or 1-3 business days nationwide with real-time tracking",
     },
     {
       name: "Installation Services",
-      description: "Professional installation of materials and systems by certified technicians"
+      description:
+        "Professional installation of materials and systems by certified technicians",
     },
     {
       name: "Custom Cutting & Sizing",
-      description: "Custom cutting and sizing for wood, glass, metal, and other materials to exact specifications"
+      description:
+        "Custom cutting and sizing for wood, glass, metal, and other materials to exact specifications",
     },
     {
       name: "Contractor Support",
-      description: "Special pricing, dedicated account managers, and bulk ordering options for professional contractors"
+      description:
+        "Special pricing, dedicated account managers, and bulk ordering options for professional contractors",
     },
     {
       name: "Project Consultation",
-      description: "Expert advice on material selection, quantity estimation, and project planning"
+      description:
+        "Expert advice on material selection, quantity estimation, and project planning",
     },
     {
       name: "Technical Support",
-      description: "24/7 technical support for product inquiries, troubleshooting, and application guidance"
-    }
+      description:
+        "24/7 technical support for product inquiries, troubleshooting, and application guidance",
+    },
   ],
   contact: {
-    phone: "+1 (800) 555-UBAKA",
-    email: ["support@ubaka.com", "sales@ubaka.com"],
-    address: "1234 Construction Ave, New York, NY 10001",
-    hours: ["Mon-Fri: 8am-8pm EST", "Sat: 9am-5pm EST"]
+    phone: "+1 (800) 555-SHOPACLa",
+    email: ["shopacla.us@gmail.com", "sales@shopacla.com"],
+    address: "1234 Construction Ave, Kigali, Rwanda",
+    hours: ["Mon-Fri: 8am-8pm EST", "Sat: 9am-5pm EST"],
   },
   products: {
     categories: [
@@ -68,9 +75,9 @@ const companyKnowledge = {
       "Structural Components",
       "Flooring",
       "Insulation",
-      "Windows & Doors"
-    ]
-  }
+      "Windows & Doors",
+    ],
+  },
 };
 
 app.post('/chat', async (req, res) => {

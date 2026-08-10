@@ -1,146 +1,201 @@
-import { supabase } from '@/integrations/supabase/client';
-import { Category, DbCategory } from '@/lib/utils';
+  import { supabase } from '@/integrations/supabase/client';
 
-export const fetchCategories = async () => {
-  const { data, error } = await supabase
-    .from('categories')
-    .select('*, product_count:products(count)')
-    .order('name');
-
-  if (error) {
-    throw new Error(error.message);
+  export interface Category {
+    id: string;
+    name: string;
+    slug: string;
+    description: string | null;
+    image_url: string | null;
+    created_at: string;
   }
 
-  return (data || []).map(category => ({
-    id: category.id,
-    name: category.name,
-    description: category.description,
-    image: category.image,
-    count: category.product_count?.[0]?.count || 0,
-    created_at: category.created_at,
-    updated_at: category.updated_at
-  })) as Category[];
-};
+  /**
+   * Get all categories
+   */
+  export const fetchCategories = async (): Promise<Category[]> => {
+    const { data, error } = await supabase
+      .from('categories')
+      .select('id, name, slug, description, image_url, created_at')
+      .order('name', { ascending: true });
 
-export const fetchCategoryById = async (categoryId: string) => {
-  const { data, error } = await supabase
-    .from('categories')
-    .select('*, product_count:products(count)')
-    .eq('id', categoryId)
-    .single();
+    if (error) {
+      console.error('Error fetching categories:', error);
+      throw new Error(error.message);
+    }
 
-  if (error) {
-    throw new Error(error.message);
-  }
+    console.log('Categories from Supabase:', data);
 
-  return {
-    id: data.id,
-    name: data.name,
-    description: data.description,
-    image: data.image,
-    count: data.product_count?.[0]?.count || 0,
-    created_at: data.created_at,
-    updated_at: data.updated_at
-  } as Category;
-};
-
-export const createCategory = async (categoryData: Omit<Category, 'id'>) => {
-  const dbCategory: Omit<DbCategory, 'id'> = {
-    name: categoryData.name,
-    description: categoryData.description,
-    image: categoryData.image
+    return data ?? [];
   };
 
-  const { data, error } = await supabase
-    .from('categories')
-    .insert(dbCategory)
-    .select()
-    .single();
+  /**
+   * Get a category by ID
+   */
+  export const fetchCategoryById = async (
+    categoryId: string
+  ): Promise<Category> => {
+    const { data, error } = await supabase
+      .from('categories')
+      .select('id, name, slug, description, image_url, created_at')
+      .eq('id', categoryId)
+      .single();
 
-  if (error) {
-    throw new Error(error.message);
-  }
+    if (error) {
+      console.error('Error fetching category:', error);
+      throw new Error(error.message);
+    }
 
-  return {
-    id: data.id,
-    name: data.name,
-    description: data.description,
-    image: data.image,
-    count: 0,
-    created_at: data.created_at,
-    updated_at: data.updated_at
-  } as Category;
-};
-
-export const updateCategory = async (categoryId: string, categoryData: Partial<Category>) => {
-  const dbCategory: Partial<DbCategory> = {
-    name: categoryData.name,
-    description: categoryData.description,
-    image: categoryData.image
+    return data;
   };
 
-  const { data, error } = await supabase
-    .from('categories')
-    .update(dbCategory)
-    .eq('id', categoryId)
-    .select()
-    .single();
+  /**
+   * Create a new category
+   */
+  export const createCategory = async (categoryData: {
+    name: string;
+    slug: string;
+    description?: string | null;
+    image_url?: string | null;
+  }): Promise<Category> => {
+    const { data, error } = await supabase
+      .from('categories')
+      .insert({
+        name: categoryData.name,
+        slug: categoryData.slug,
+        description: categoryData.description ?? null,
+        image_url: categoryData.image_url ?? null,
+      })
+      .select('id, name, slug, description, image_url, created_at')
+      .single();
 
-  if (error) {
-    throw new Error(error.message);
-  }
+    if (error) {
+      console.error('Error creating category:', error);
+      throw new Error(error.message);
+    }
 
-  return {
-    id: data.id,
-    name: data.name,
-    description: data.description,
-    image: data.image,
-    count: 0, // We'll need to fetch this separately if needed
-    created_at: data.created_at,
-    updated_at: data.updated_at
-  } as Category;
-};
+    return data;
+  };
 
-export const deleteCategory = async (categoryId: string) => {
-  // Check if category has products
-  const { count, error: countError } = await supabase
-    .from('products')
-    .select('*', { count: 'exact', head: true })
-    .eq('category_id', categoryId);
+  /**
+   * Update a category
+   */
+  export const updateCategory = async (
+    categoryId: string,
+    categoryData: {
+      name?: string;
+      slug?: string;
+      description?: string | null;
+      image_url?: string | null;
+    }
+  ): Promise<Category> => {
+    const { data, error } = await supabase
+      .from('categories')
+      .update({
+        ...(categoryData.name !== undefined && {
+          name: categoryData.name,
+        }),
 
-  if (countError) {
-    throw new Error(countError.message);
-  }
+        ...(categoryData.slug !== undefined && {
+          slug: categoryData.slug,
+        }),
 
-  if (count && count > 0) {
-    throw new Error(`Cannot delete category with ${count} products. Please move or delete the products first.`);
-  }
+        ...(categoryData.description !== undefined && {
+          description: categoryData.description,
+        }),
 
-  const { error } = await supabase
-    .from('categories')
-    .delete()
-    .eq('id', categoryId);
+        ...(categoryData.image_url !== undefined && {
+          image_url: categoryData.image_url,
+        }),
+      })
+      .eq('id', categoryId)
+      .select('id, name, slug, description, image_url, created_at')
+      .single();
 
-  if (error) {
-    throw new Error(error.message);
-  }
+    if (error) {
+      console.error('Error updating category:', error);
+      throw new Error(error.message);
+    }
 
-  return true;
-};
+    return data;
+  };
 
-// Helper function to check if the current user has admin role
-async function checkIfUserIsAdmin(): Promise<boolean> {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    return false;
-  }
+  /**
+   * Delete a category
+   *
+   * A category cannot be deleted if products are
+   * currently using that category.
+   */
+  export const deleteCategory = async (
+    categoryId: string
+  ): Promise<boolean> => {
+    // Check whether products are using this category
+    const { count, error: countError } = await supabase
+      .from('products')
+      .select('id', {
+        count: 'exact',
+        head: true,
+      })
+      .eq('category_id', categoryId);
 
-  const { data } = await supabase
-    .from('user_roles')
-    .select()
-    .eq('user_id', user.id)
-    .eq('role', 'admin')
-    .maybeSingle();
+    if (countError) {
+      console.error(
+        'Error checking category products:',
+        countError
+      );
 
-  return !!data;
-}
+      throw new Error(countError.message);
+    }
+
+    if (count && count > 0) {
+      throw new Error(
+        `Cannot delete this category because ${count} product${
+          count === 1 ? '' : 's'
+        } use it.`
+      );
+    }
+
+    const { error } = await supabase
+      .from('categories')
+      .delete()
+      .eq('id', categoryId);
+
+    if (error) {
+      console.error('Error deleting category:', error);
+      throw new Error(error.message);
+    }
+
+    return true;
+  };
+
+  /**
+   * Check whether the currently logged-in user is an admin.
+   *
+   * The user's role is stored in:
+   * public.profiles.role
+   *
+   * The profile ID is the same UUID as auth.users.id.
+   */
+  export const checkIfUserIsAdmin = async (): Promise<boolean> => {
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      return false;
+    }
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .eq('role', 'admin')
+      .maybeSingle();
+
+    if (error) {
+      console.error('Error checking admin role:', error);
+      return false;
+    }
+
+    return !!data;
+  };

@@ -151,7 +151,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     toast({
       title: "Sign up successful",
-      description: "Welcome to Ubaka!",
+      description: "Welcome to Shopacla!",
     });
     
     return { error: null, data: response.data.session };
@@ -166,33 +166,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-  const updateProfile = async (updates: Partial<any>) => {
-    try {
-      const { error } = await supabase
-        .from('profiles')
-        .update(updates)
-        .eq('id', user?.id);
+ const updateProfile = async (updates: Partial<any>) => {
+  try {
+    const { data, error } = await supabase
+      .from("profiles")
+      .update(updates)
+      .eq("id", user?.id)
+      .select()
+      .single();
 
-      if (error) throw error;
+    if (error) throw error;
 
-      setProfile({
-        ...profile,
-        ...updates,
-      });
-      
-      toast({
-        title: "Profile updated",
-        description: "Your profile has been updated successfully.",
-      });
-    } catch (error: any) {
-      toast({
-        title: "Profile update failed",
-        description: error.message,
-        variant: "destructive",
-      });
-    }
-  };
+    setProfile({
+      ...profile,
+      ...data,
+    });
 
+    toast({
+      title: "Profile updated",
+      description: "Your profile has been updated successfully.",
+    });
+
+  } catch (error: any) {
+    console.error("Profile update error:", error);
+
+    toast({
+      title: "Profile update failed",
+      description: error.message,
+      variant: "destructive",
+    });
+  }
+};
   const value = {
     session,
     user,

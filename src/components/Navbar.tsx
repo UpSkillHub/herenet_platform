@@ -76,7 +76,7 @@ const Navbar = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/80 dark:bg-ubaka-950/80 shadow-subtle backdrop-blur-md'
+          ? 'bg-white/80 dark:bg-shopacla-950/80 shadow-subtle backdrop-blur-md'
           : 'bg-transparent'
       }`}
     >
@@ -87,8 +87,8 @@ const Navbar = () => {
             to="/"
             className="flex items-center space-x-2 transition-transform hover:scale-105"
           >
-            <span className="font-bold text-2xl text-ubaka-900 dark:text-white">
-              UBAKA
+            <span className="font-bold text-2xl text-shopacla-900 dark:text-white">
+              SHOPACLA
             </span>
           </Link>
           
@@ -98,7 +98,7 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={link.path}
-                className={`text-ubaka-700 dark:text-white/80 hover:text-ubaka-900 dark:hover:text-white transition-all ${
+                className={`text-shopacla-700 dark:text-white/80 hover:text-shopacla-900 dark:hover:text-white transition-all ${
                   location.pathname === link.path ? 'font-medium' : ''
                 }`}
               >
@@ -210,7 +210,7 @@ const Navbar = () => {
             : 'max-h-0 opacity-0 invisible'
         }`}
       >
-        <div className="container mx-auto px-4 py-4 bg-background dark:bg-ubaka-900 shadow-md">
+        <div className="container mx-auto px-4 py-4 bg-background dark:bg-shopacla-900 shadow-md">
           <form onSubmit={handleSearch} className="relative mb-4">
             <Input
               type="search"
@@ -229,8 +229,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`px-2 py-1.5 rounded-md transition-colors ${
                   location.pathname === link.path 
-                    ? 'bg-secondary text-ubaka-900 dark:text-white font-medium' 
-                    : 'text-ubaka-700 dark:text-white/80 hover:bg-secondary'
+                    ? 'bg-secondary text-shopacla-900 dark:text-white font-medium' 
+                    : 'text-shopacla-700 dark:text-white/80 hover:bg-secondary'
                 }`}
               >
                 {link.name}
@@ -257,7 +257,7 @@ const Navbar = () => {
                 {isAdmin && (
                   <Link 
                     to="/admin" 
-                    className="px-2 py-1.5 rounded-md transition-colors text-ubaka-700 dark:text-white/80 hover:bg-secondary"
+                    className="px-2 py-1.5 rounded-md transition-colors text-shopacla-700 dark:text-white/80 hover:bg-secondary"
                   >
                     Administration
                   </Link>

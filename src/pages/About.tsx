@@ -8,20 +8,20 @@ import { Users, Target, Award, Clock, TrendingUp, Lightbulb } from 'lucide-react
 const About = () => {
   const teamMembers = [
     {
-      name: "IRADUKUNDA Bonheur",
-      position: "CEO",
-      image: "/bobox.jpg",
-      description: "Leading the company with vision and strategic direction."
-    },
-    {
-      name: "UWIHANGANYE EDISON",
-      position: "Intelligence System Engineer",
-      image: "https://media.licdn.com/dms/image/v2/D4D03AQH_4THyS9-igg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1715287233733?e=1753920000&v=beta&t=1tu6A3xMDVJxxIJTkiDepZ_Do0lvhQ59NCHB9ZhnxZE",
-      description: "Focusing on developing smart solutions and systems."
+      name: "Mugisha Edson",
+      position: "Software Engineer",
+      image: "https://avatars.githubusercontent.com/u/109290022?v=4",
+      description: "Bringing expertise in construction and engineering practices."
     },
     {
       name: "Mugisha Edson",
-      position: "Construction Engineer",
+      position: "Software Engineer",
+      image: "https://avatars.githubusercontent.com/u/109290022?v=4",
+      description: "Bringing expertise in construction and engineering practices."
+    },
+    {
+      name: "Mugisha Edson",
+      position: "Software Engineer",
       image: "https://avatars.githubusercontent.com/u/109290022?v=4",
       description: "Bringing expertise in construction and engineering practices."
     }
@@ -68,7 +68,7 @@ const About = () => {
         <div className="container mx-auto px-4 md:px-6">
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">About Ubaka</h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-4">About Shopacla</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               We're transforming how the world sources construction materials through technology and exceptional service.
             </p>
@@ -79,19 +79,19 @@ const About = () => {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Our Story</h2>
               <p className="text-lg mb-4">
-                Founded in 2020, Ubaka was born from a simple observation: the construction materials industry was overdue for innovation.
+                Founded in 2026, Shopacla was born from a simple observation: the construction materials industry was overdue for innovation.
               </p>
               <p className="text-lg mb-4">
                 Our founder, Emma Richardson, spent decades in the construction industry witnessing firsthand the inefficiencies in how materials were sourced, purchased, and delivered. She envisioned a better way - a platform that would bring the entire process online with transparency, speed, and reliability.
               </p>
               <p className="text-lg">
-                Today, Ubaka serves thousands of contractors, businesses, and DIY enthusiasts across the country, providing access to premium construction materials with just a few clicks. What started as a small team with a big vision has grown into a company that's setting new standards in the industry.
+                Today, shopacla serves thousands of contractors, businesses, and DIY enthusiasts across the country, providing access to premium construction materials with just a few clicks. What started as a small team with a big vision has grown into a company that's setting new standards in the industry.
               </p>
             </div>
             <div className="rounded-lg overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1541976590-713941681591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                alt="Ubaka headquarters"
+                alt="Shopacla headquarters"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -139,28 +139,13 @@ const About = () => {
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Our Journey</h2>
             <div className="space-y-8">
               <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/4 font-bold text-xl mb-2 md:mb-0">2020</div>
+                <div className="md:w-1/4 font-bold text-xl mb-2 md:mb-0">2026</div>
                 <div className="md:w-3/4">
-                  <h3 className="text-lg font-semibold">Ubaka Founded</h3>
-                  <p className="text-muted-foreground">Launched with a small catalog of essential building materials.</p>
+                  <h3 className="text-lg font-semibold">Shopacla Founded</h3>
+                  <p className="text-muted-foreground">Launched with as platform for buying and selling for everyone around Affrica</p>
                 </div>
               </div>
-              <Separator />
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/4 font-bold text-xl mb-2 md:mb-0">2021</div>
-                <div className="md:w-3/4">
-                  <h3 className="text-lg font-semibold">Expanded Nationwide</h3>
-                  <p className="text-muted-foreground">Established distribution centers across all major cities.</p>
-                </div>
-              </div>
-              <Separator />
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/4 font-bold text-xl mb-2 md:mb-0">2022</div>
-                <div className="md:w-3/4">
-                  <h3 className="text-lg font-semibold">Professional Services Launch</h3>
-                  <p className="text-muted-foreground">Introduced installation, consultation, and custom cutting services.</p>
-                </div>
-              </div>
+             
               <Separator />
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/4 font-bold text-xl mb-2 md:mb-0">2023</div>
@@ -169,14 +154,7 @@ const About = () => {
                   <p className="text-muted-foreground">Committed to carbon-neutral operations and introduced eco-friendly product lines.</p>
                 </div>
               </div>
-              <Separator />
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/4 font-bold text-xl mb-2 md:mb-0">2024</div>
-                <div className="md:w-3/4">
-                  <h3 className="text-lg font-semibold">Digital Transformation</h3>
-                  <p className="text-muted-foreground">Launched new platform with enhanced features for contractors and DIY customers.</p>
-                </div>
-              </div>
+             
             </div>
           </div>
 
@@ -184,7 +162,7 @@ const About = () => {
           <div className="bg-secondary rounded-lg p-8 md:p-12 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Join Our Journey</h2>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-              We're always looking for talented individuals who share our passion for innovation and excellence in the construction industry.
+              Whether you're a individual, we invite you to be part of our mission to revolutionize the industry. Explore career opportunities or reach out to collaborate with us.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg">View Careers</Button>

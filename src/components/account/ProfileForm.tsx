@@ -31,26 +31,27 @@ const ProfileForm = () => {
     state: "",
     zipCode: "",
   });
-
   useEffect(() => {
-    if (profile) {
-      setProfileData({
-        firstName: profile.first_name || "",
-        lastName: profile.last_name || "",
-        email: profile.email || user?.email || "",
-        phone: profile.phone || "",
-        address: profile.address || "",
-        city: profile.city || "",
-        state: profile.state || "",
-        zipCode: profile.zip || "",
-      });
-    } else if (user) {
-      setProfileData(prev => ({
-        ...prev,
-        email: user.email || "",
-      }));
-    }
-  }, [profile, user]);
+  if (profile) {
+    const names = (profile.full_name || "").split(" ");
+
+    setProfileData({
+      firstName: names[0] || "",
+      lastName: names.slice(1).join(" ") || "",
+      email: user?.email || "",
+      phone: profile.phone || "",
+      address: profile.address || "",
+      city: "",
+      state: "",
+      zipCode: "",
+    });
+  } else if (user) {
+    setProfileData(prev => ({
+      ...prev,
+      email: user.email || "",
+    }));
+  }
+}, [profile, user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProfileData({
@@ -59,24 +60,20 @@ const ProfileForm = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSaving(true);
-    
-    try {
-      await updateProfile({
-        first_name: profileData.firstName,
-        last_name: profileData.lastName,
-        phone: profileData.phone,
-        address: profileData.address,
-        city: profileData.city,
-        state: profileData.state,
-        zip: profileData.zipCode,
-      });
-    } finally {
-      setIsSaving(false);
-    }
-  };
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSaving(true);
+
+  try {
+    await updateProfile({
+      full_name: `${profileData.firstName} ${profileData.lastName}`.trim(),
+      phone: profileData.phone,
+      address: profileData.address,
+    });
+  } finally {
+    setIsSaving(false);
+  }
+};
 
   if (isLoading) {
     return (

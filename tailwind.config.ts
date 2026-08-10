@@ -57,7 +57,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        ubaka: {
+        shopacla: {
           50: "#f5f7fa",
           100: "#ebeef3",
           200: "#d1d6e3",

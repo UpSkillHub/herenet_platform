@@ -174,7 +174,7 @@ export default function AmazingAIChat() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                   UBAKA  AI Assistant
+                   SHOPACLA  AI Assistant
                   </h3>
                   <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
                     <Zap className="h-3 w-3" />
@@ -339,7 +339,7 @@ export default function AmazingAIChat() {
                   <div className="flex items-center justify-center mt-2">
                     <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
                       <Sparkles className="h-3 w-3" />
-                      Powered by UBAKA AI Engineers 
+                      Powered by SHOPACLA AI Engineers 
                     </p>
                   </div> 
                 </div>

@@ -54,7 +54,7 @@ const Contact = () => {
     {
       icon: <Mail className="h-5 w-5 text-primary" />,
       title: "Email",
-      details: ["contact@ubaka.com"]
+      details: ["shopacla.us@gmail.com"]
     },
     {
       icon: <MapPin className="h-5 w-5 text-primary" />,

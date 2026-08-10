@@ -36,7 +36,7 @@ const Categories = () => {
           <div className="flex flex-col space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold">Product Categories</h1>
             <p className="text-muted-foreground max-w-2xl">
-              Browse our extensive range of construction materials categorized to help you find exactly what you need for your project.
+              Browse our extensive range of products materials categorized to help you find exactly what you need.
             </p>
             
             {isLoading ? (

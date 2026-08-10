@@ -34,28 +34,28 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-ubaka-50 dark:bg-ubaka-900 border-t border-border">
+    <footer className="bg-shopacla-50 dark:bg-shopacla-900 border-t border-border">
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8">
           {/* Company Info */}
           <div>
             <Link to="/" className="inline-block mb-6">
-              <span className="font-bold text-2xl text-ubaka-900 dark:text-white">UBAKA</span>
+              <span className="font-bold text-2xl text-shopacla-900 dark:text-white">SHOPACLA</span>
             </Link>
             
             <p className="text-muted-foreground mb-6 max-w-xs">
-              Premium construction materials and supplies.
+              Premium products from trusted venders
             </p>
             
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>0788240303</span>
+                <span>0788282329</span>
               </div>
               
               <div className="flex items-center space-x-3 text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>contact@ubaka.com</span>
+                <span>shopacla.us@gmail.com</span>
               </div>
               
               <div className="flex items-center space-x-3 text-muted-foreground">
@@ -190,7 +190,7 @@ const Footer = () => {
         <div className="pt-8 mt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-muted-foreground">
-              &copy; {currentYear} Ubaka Inc. All rights reserved.
+              &copy; {currentYear} Shopacla Inc. All rights reserved.
             </p>
             
             <div className="mt-4 md:mt-0 flex items-center space-x-4">

@@ -44,7 +44,7 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
       onMouseLeave={() => setIsHovered(false)}
       style={{ animationDelay: animDelay }}
     >
-      <div className="bg-white dark:bg-ubaka-900/20 rounded-xl overflow-hidden shadow-subtle transition-all duration-300 hover:shadow-md relative h-full flex flex-col">
+      <div className="bg-white dark:bg-shopacla-900/20 rounded-xl overflow-hidden shadow-subtle transition-all duration-300 hover:shadow-md relative h-full flex flex-col">
         {/* Discount tag */}
         {product.discount > 0 && (
           <div className="absolute top-4 left-4 z-10 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
@@ -60,7 +60,7 @@ const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
         )}
 
         {/* Product Image */}
-        <div className={`relative pt-[75%] overflow-hidden bg-gray-100 dark:bg-ubaka-950/20`}>
+        <div className={`relative pt-[75%] overflow-hidden bg-gray-100 dark:bg-shopacla-950/20`}>
           <img
             src={product.image || 'https://via.placeholder.com/400x300?text=Product+Image'}
             alt={product.name}

@@ -452,7 +452,7 @@ class PaymentService {
   private generateOrderReference(): string {
     const timestamp = new Date().getTime();
     const random = Math.floor(Math.random() * 1000);
-    return `UBAKA-${timestamp}-${random}`;
+    return `SHOPACLA-${timestamp}-${random}`;
   }
 
   /**
@@ -538,7 +538,7 @@ export const initiatePayment = async (paymentDetails: PaymentDetails): Promise<F
             name: paymentDetails.name,
           },
           customizations: {
-            title: 'Ubaka Marketplace',
+            title: 'Shopacla Marketplace',
             description: 'Payment for your purchase',
             logo: '/logo.png',
           },

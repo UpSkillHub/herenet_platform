@@ -41,7 +41,7 @@ const Services = () => {
   
   const testimonials = [
     {
-      quote: "Ubaka has transformed how we source materials. Their delivery speed and quality are unmatched in the industry.",
+      quote: "shopacla has transformed how we source materials. Their delivery speed and quality are unmatched in the industry.",
       author: "James Wilson",
       position: "General Contractor",
       company: "Wilson Construction"

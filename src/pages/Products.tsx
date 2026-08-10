@@ -59,19 +59,26 @@ const Products = () => {
       
       const { sortBy: dbSortBy, sortOrder } = sortMapping[sortBy];
       
+      
       return fetchProducts({
         category: selectedCategory || '',
         search: debouncedSearch,
         sortBy: dbSortBy,
         sortOrder: sortOrder,
-        limit: 24
-      });
+        limit: 24,
+        inStock: null, // Fetch all products regardless of stock status
+    });
     },
     { keepPreviousData: true }
   );
   
   const categories = categoriesData || [];
   const products = productsData?.products || [];
+
+
+console.log("PRODUCTS DISPLAYED:", products);
+console.log("PRODUCTS RESPONSE:", productsData); 
+
   const isLoading = categoriesLoading || productsLoading;
 
   const handleSearch = (e: React.FormEvent) => {

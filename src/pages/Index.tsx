@@ -12,7 +12,7 @@ const Index = () => {
     window.scrollTo(0, 0);
     
     // Set page title
-    document.title = "Ubaka - Premium Construction Materials";
+    document.title = "Shopacla - Best product from trusted venders";
   }, []);
 
   return (
@@ -28,7 +28,7 @@ const Index = () => {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Ubaka</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose shopacla</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
                 We're committed to providing the highest quality materials and exceptional service.
               </p>
@@ -36,7 +36,7 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Quality Promise */}
-              <div className="bg-white dark:bg-ubaka-900/50 rounded-xl p-6 text-center shadow-subtle transition-transform hover:translate-y-[-5px]">
+              <div className="bg-white dark:bg-shopacla-900/50 rounded-xl p-6 text-center shadow-subtle transition-transform hover:translate-y-[-5px]">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 15L8.5 18.5L6 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -48,12 +48,12 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Premium Quality</h3>
                 <p className="text-muted-foreground">
-                  We source only the highest quality materials from trusted manufacturers.
+                  We source only the highest quality products from trusted manufacturers.
                 </p>
               </div>
               
               {/* Expertise */}
-              <div className="bg-white dark:bg-ubaka-900/50 rounded-xl p-6 text-center shadow-subtle transition-transform hover:translate-y-[-5px]">
+              <div className="bg-white dark:bg-shopacla-900/50 rounded-xl p-6 text-center shadow-subtle transition-transform hover:translate-y-[-5px]">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -69,12 +69,12 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Expert Advice</h3>
                 <p className="text-muted-foreground">
-                  Our team of construction experts is available to guide your project.
+                  Our team of experts is here to provide guidance and support you may need.
                 </p>
               </div>
               
               {/* Fast Delivery */}
-              <div className="bg-white dark:bg-ubaka-900/50 rounded-xl p-6 text-center shadow-subtle transition-transform hover:translate-y-[-5px]">
+              <div className="bg-white dark:bg-shopacla-900/50 rounded-xl p-6 text-center shadow-subtle transition-transform hover:translate-y-[-5px]">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16 16V8C16 6.89543 15.1046 6 14 6H6C4.89543 6 4 6.89543 4 8V16C4 17.1046 4.89543 18 6 18H14C15.1046 18 16 17.1046 16 16Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -85,14 +85,14 @@ const Index = () => {
                     <path d="M10 12C10 12 11 12 12 12C13 12 14 12 14 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Fast Delivery</h3>
-                <p className="text-muted-foreground">
-                  Quick and reliable delivery to your project site when you need it.
+                <h3 className="text-xl font-semibold mb-2">Delivery</h3>
+                  <p className="text-muted-foreground">
+                    Quick and reliable delivery to your products when you need it.
                 </p>
               </div>
               
               {/* Customer Support */}
-              <div className="bg-white dark:bg-ubaka-900/50 rounded-xl p-6 text-center shadow-subtle transition-transform hover:translate-y-[-5px]">
+              <div className="bg-white dark:bg-shopacla-900/50 rounded-xl p-6 text-center shadow-subtle transition-transform hover:translate-y-[-5px]">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 8.4C18 6.70261 17.3679 5.07475 16.2426 3.87452C15.1174 2.67428 13.5913 2 12 2C10.4087 2 8.88258 2.67428 7.75736 3.87452C6.63214 5.07475 6 6.70261 6 8.4C6 15.8667 3 18 3 18H21C21 18 18 15.8667 18 8.4Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -109,7 +109,7 @@ const Index = () => {
         </section>
         
         {/* Call to Action */}
-        <section className="py-16 md:py-24 bg-ubaka-900 text-white relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-shopacla-900 text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <svg className="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -123,17 +123,17 @@ const Index = () => {
           
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Project?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to start your seemless online shoping?</h2>
               <p className="text-white/80 text-lg md:text-xl mb-8">
-                Join thousands of satisfied customers who trust Ubaka for their construction material needs.
+                Join thousands of satisfied customers who trust Shopacla for their daily products they need.
               </p>
               
               <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <a 
                   href="/products"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-white text-ubaka-900 font-medium hover:bg-white/90 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-white text-shopacla-900 font-medium hover:bg-white/90 transition-colors"
                 >
-                  Shop Materials
+                  Shop Products
                 </a>
                 
                 <a 

@@ -80,7 +80,7 @@ const CategoryGrid = () => {
                   className="group relative overflow-hidden rounded-xl h-72"
                 >
                   {/* Background image */}
-                  <div className="absolute inset-0 bg-ubaka-900/40 group-hover:bg-ubaka-900/30 transition-all duration-300 z-10" />
+                  <div className="absolute inset-0 bg-shopacla-900/40 group-hover:bg-shopacla-900/30 transition-all duration-300 z-10" />
 
                   <img
                     src={category.image || getFallbackImageUrl()}

@@ -86,7 +86,7 @@ const ProductDetail = () => {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Product Image */}
-                <div className="bg-gray-100 dark:bg-ubaka-950/20 rounded-lg overflow-hidden">
+                <div className="bg-gray-100 dark:bg-shopacla-950/20 rounded-lg overflow-hidden">
                   <img
                     src={product.image || 'https://via.placeholder.com/600x600?text=Product+Image'}
                     alt={product.name}
