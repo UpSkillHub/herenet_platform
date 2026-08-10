@@ -1,10 +1,7 @@
-# Ubaka Marketplace
+#shopacla
 
 A modern e-commerce platform built with React, TypeScript, and Supabase.
 
-## Live Demo
-
-Visit the live application at: [https://ubaka.codewithedison.com/](https://ubaka.codewithedison.com/)
 
 ## Features
 
@@ -80,12 +77,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-Edison - [@codeWithEdison](https://github.com/codeWithEdison)
-
-Project Link: [https://github.com/codeWithEdison/ubaka-marketplace](https://github.com/codeWithEdison/ubaka-marketplace)
